@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const PhotoSchema = new mongoose.Schema({
     url_photo: String,
     hour: Date, 
-    id_camera: ObjectId,
+    // id_camera: ObjectId,
        
 
 }, 
