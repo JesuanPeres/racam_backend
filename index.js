@@ -9,6 +9,6 @@ const app = express();
 app.use(express.json());    
 app.use(routes);
 
-const PORT = 3333;
+const PORT = 8080;
 app.listen(PORT, console.log(`estou a funcionar na porta ${PORT}`));
 
