@@ -39,7 +39,12 @@ module.exports = {
                 return res.json({success: false, message: 'Wrong email/password'});
             }
 
-            return res.json({success: true, message: 'You are loged in'});
+            req.login(user, (err)=>{
+                if(err){
+                    return res.json({success: false, message: err}); 
+                }
+                return res.json({success: true, message: 'You are loged in'});
+            });
 
         })(req, res, next);
         
@@ -59,12 +64,8 @@ module.exports = {
     },
 
     async profile(req, res){
-        if(req.user){
-            const {_id, email, name} = req.user;
-            return res.json({loged: true, _id, name, email});
-        } 
-
-        return res.json({loged: false});
+        const {_id, email, name} = req.user;
+        return res.json({loged: true, _id, name, email});
     },
 
     async logout(req, res){
