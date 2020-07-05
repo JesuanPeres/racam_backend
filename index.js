@@ -17,6 +17,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(routes);
 
-const PORT = 3333;
+const PORT = 8080;
 app.listen(PORT, console.log(`estou a funcionar na porta ${PORT}`));
 
