@@ -7,8 +7,9 @@ const saltRounds = parseInt(process.env.SALT_ROUNDS);
 module.exports = {
     async store(req, res){
         const {name, email, password} = req.body;
+        console.log(req.body);
 
-        const user_exits = await User.findOne('email', email);
+        const user_exits = await User.findOne({email: email});
 
         if(user_exits){
             return res.json({success: false, message: 'This email have already been taked'});
