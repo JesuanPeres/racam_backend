@@ -5,6 +5,8 @@ const multer = require('multer');
 const uploadConfig = require('./config/upload')
 const PhotoController = require('./controllers/PhotoController');
 const UserController = require('./controllers/UserController');
+const RegisterCamController = require('./controllers/RegisterCamController');
+
 
 const upload = multer(uploadConfig)
 
@@ -29,6 +31,7 @@ router.get('/photos', PhotoController.getAllPhotos);
 //route used to see a single photo
 router.get('/photos/:id', PhotoController.getPhoto);
 
+
 //route used to register a new user
 router.post('/user', UserController.store);
 //route used to login user
@@ -39,5 +42,7 @@ router.get('/user/show/:name', UserController.show);
 router.get('/auth/profile', UserController.profile);
 //logout user
 router.post('/auth/logout', UserController.logout);
+
+router.get('/registercam', RegisterCamController.store);
 
 module.exports = router;
