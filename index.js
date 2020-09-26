@@ -1,6 +1,8 @@
 const express = require('express');
 const passport = require('passport');
-const session = require('cookie-session');
+// const session = require('cookie-session');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 require('./src/config/auth');
@@ -10,6 +12,8 @@ const sessionConfig = require('./src/config/session');
 const routes = require('./src/routes');
 
 const app = express();
+
+app.use(cookieParser(sessionConfig.secret));
 
 app.use(session(sessionConfig));
 app.use(express.json());
