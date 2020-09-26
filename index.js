@@ -1,6 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-// const session = require('cookie-session');
+// const session = require('cookie-session'); //(remover caso autenticacao via express-session der certo)
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
@@ -16,7 +16,10 @@ const app = express();
 
 
 app.use(cookieParser(sessionConfig.secret));
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONT_END_URL,
+  credentials: true
+}));
 
 app.use(session(sessionConfig));
 app.use(express.json());
