@@ -43,6 +43,6 @@ router.get('/auth/profile', UserController.profile);
 //logout user
 router.post('/auth/logout', UserController.logout);
 
-router.get('/registercam', RegisterCamController.store);
+router.post('/registercam', RegisterCamController.store);
 
 module.exports = router;

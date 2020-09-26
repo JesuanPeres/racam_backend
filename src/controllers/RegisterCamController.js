@@ -1,33 +1,40 @@
-const User = require('../models/User');
+const Camera = require('../models/Camera');
 // const bcrypt = require('bcrypt');
 // const passport = require('passport');
+
 
 // const saltRounds = parseInt(process.env.SALT_ROUNDS);
 
 module.exports = {
     async store(req, res){
-        console.log('user: ')
-        console.log(req.user); 
-        // const {name, email, password} = req.body;
-        // console.log(req.body);
+        // console.log('user: ')
+        // console.log(req.user["_id"]);
+        let id = req.user["_id"]
+        
+        const {name, code} = req.body;
+        console.log(code)
 
-        // const user_exits = await User.findOne({email: email});
 
-        // if(user_exits){
-        //     return res.json({success: false, message: 'This email have already been taked'});
-        // }
+        
+        const cam_exits = await Camera.findOne({'code': code});
 
-        // const user = new User();
+        if(cam_exits){
+            return res.json({success: false, message: 'Camera already used'});
+        }
 
-        // user.name = name;
-        // user.email = email;
+        const cam = new Camera();
+
+        cam.name = name;
+        cam.code = code;
+        cam. idOwner = id
         
         
-        // const success = await user.save();
+        const success = await cam.save();
 
-        // if(!success){
-        //     return res.json({'error': 'Can not save user'})
-        // }
+        if(!success){
+            return res.json({'error': 'Can not save camera'})
+        }
+        
 
         return res.json({success: true});
     },

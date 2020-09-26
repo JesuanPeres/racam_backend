@@ -5,7 +5,7 @@ const CameraSchema = new mongoose.Schema({
         type: String,
     },
     idOwner:{
-        type: Schema.ObjectId,
+        type: mongoose.Schema.ObjectId,
         ref: "User", 
     }, 
     name:{

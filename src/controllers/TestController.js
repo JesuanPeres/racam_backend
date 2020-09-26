@@ -8,6 +8,7 @@ module.exports = {
     async store(req, res){
         console.log('user: ')
         console.log(req.user); 
+        
         // const {name, email, password} = req.body;
         // console.log(req.body);
 
