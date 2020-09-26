@@ -40,7 +40,7 @@ module.exports = {
                 return res.json({success: false, message: 'Wrong email/password'});
             }
 
-            req.login(user, (err)=>{
+            req.logIn(user, (err)=>{
                 if(err){
                     return res.json({success: false, message: err}); 
                 }
