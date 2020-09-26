@@ -16,13 +16,13 @@ router.get('/' , (req,res) => {
 });
 
 // middleware used to check if user is loged in, called when the route starts with /auth/
-router.use('/auth/*', (req, res, next)=>{
-    if(!req.user){
-        return res.status(401).json({message: 'unauthorized'});
-    }
+// router.use('/auth/*', (req, res, next)=>{
+//     if(!req.user){
+//         return res.status(401).json({message: 'unauthorized'});
+//     }
 
-    return next();
-});
+//     return next();
+// });
 
 //route used to store a photo coming from the esp
 router.post('/store_photo',upload.single('image'), PhotoController.store);

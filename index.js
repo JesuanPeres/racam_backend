@@ -34,3 +34,4 @@ app.use(routes);
 
 const PORT = 8080;
 app.listen(PORT, console.log(`estou a funcionar na porta ${PORT}`));
+console.log(process.env.FRONT_END_URL);

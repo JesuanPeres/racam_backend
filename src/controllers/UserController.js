@@ -5,6 +5,14 @@ const passport = require('passport');
 const saltRounds = parseInt(process.env.SALT_ROUNDS);
 
 module.exports = {
+    async logged(user){
+        if(user){
+            return true;
+        }
+
+        return false;
+    },
+
     async store(req, res){
         const {name, email, password} = req.body;
         console.log(req.body);
@@ -54,7 +62,6 @@ module.exports = {
     async show(req, res){
         const {name} = req.params;
         const user = await User.findOne({name: name});
-
         if(!user){
             return res.json({exists: false});
         }
@@ -65,12 +72,20 @@ module.exports = {
     },
 
     async profile(req, res){
-        const {_id, email, name} = req.user;
-        return res.json({loged: true, _id, name, email});
+        const user = await req.user;
+        if(!user){
+            return res.json({loged: false, user: null});
+        }
+
+        return res.json({loged: true, user: {id: user.id, name: user.name, email: user.email}});
     },
 
     async logout(req, res){
-        req.logout()
-        return res.json({success: true});
+        if (this.logged(req.user)){
+            req.logout()
+            return res.json({success: true});
+        }
+
+        return res.json({success: false});
     }
 }
