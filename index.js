@@ -5,6 +5,7 @@ const  cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require("body-parser");
+const path = require('path')
 
 require('dotenv').config();
 
@@ -15,6 +16,7 @@ const routes = require('./src/routes');
 
 const app = express();
 
+app.use('/files', express.static(path.resolve(__dirname, 'uploads')))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

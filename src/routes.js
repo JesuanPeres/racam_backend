@@ -5,7 +5,7 @@ const multer = require('multer');
 const uploadConfig = require('./config/upload')
 const PhotoController = require('./controllers/PhotoController');
 const UserController = require('./controllers/UserController');
-const RegisterCamController = require('./controllers/RegisterCamController');
+const RegisterCamController = require('./controllers/CamController');
 
 
 const upload = multer(uploadConfig)
@@ -26,8 +26,10 @@ router.get('/' , (req,res) => {
 
 //route used to store a photo coming from the esp
 router.post('/store_photo',upload.single('image'), PhotoController.store);
+
 //route used to retrieve all photos from the user
 router.get('/photos', PhotoController.getAllPhotos);
+
 //route used to see a single photo
 router.get('/photos/:id', PhotoController.getPhoto);
 
@@ -44,5 +46,8 @@ router.get('/auth/profile', UserController.profile);
 router.post('/auth/logout', UserController.logout);
 
 router.post('/registercam', RegisterCamController.store);
+
+
+router.get('/cameras', RegisterCamController.show);
 
 module.exports = router;

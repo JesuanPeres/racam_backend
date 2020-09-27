@@ -42,16 +42,22 @@ module.exports = {
     
 
     async show(req, res){
-        const {name} = req.params;
-        const user = await User.findOne({name: name});
+        console.log("cameras")
+        // idUser = req.user['_id']
+        // console.log(idUser);
+        idUser = "5efd36c8366ed7255a198383"
+        
+        const cameras = await Camera.find({'idOwner': idUser});
+        // console.log(cameras);
 
-        if(!user){
-            return res.json({exists: false});
-        }
 
-        const {_id, email} = user;
+        // if(!user){
+        //     return res.json({exists: false});
+        // }
+
+        // const {_id, email} = user;
     
-        return res.json({exists: true, _id, email, name});
+         return res.json({exists: true, cameras});
     },
 
     
