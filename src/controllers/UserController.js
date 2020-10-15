@@ -80,12 +80,19 @@ module.exports = {
         return res.json({loged: true, user: {id: user.id, name: user.name, email: user.email}});
     },
 
+    
+
     async logout(req, res){
-        if (this.logged(req.user)){
+        // if (this.logged(req.user)){
+        if (!(req.user)){
+
+            return res.json({success: false});
+        }
+        else{
+
             req.logout()
             return res.json({success: true});
         }
 
-        return res.json({success: false});
     }
 }
