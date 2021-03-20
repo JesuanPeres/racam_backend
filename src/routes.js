@@ -8,12 +8,23 @@ const UserController = require('./controllers/UserController');
 const RegisterCamController = require('./controllers/CamController');
 
 
-const upload = multer(uploadConfig)
-
+// const upload = multer(uploadConfig)
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '.jpg') //Appending .jpg
+    }
+  })
+  var upload = multer({ storage: storage });
 
 router.get('/' , (req,res) => {
+    console.log('opa')
     return res.send('Welcome to RACAM project');
 });
+
+router.post('/',upload.single('imageFile'), PhotoController.store2);
 
 // middleware used to check if user is loged in, called when the route starts with /auth/
 // router.use('/auth/*', (req, res, next)=>{
